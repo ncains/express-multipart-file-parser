@@ -1,5 +1,5 @@
 {
-  "name": "express-multipart-file-parser",
+  "name": "@ncains/express-multipart-file-parser",
   "version": "0.2.2",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cristovao-trevisan/express-multipart-file-parser.git"
+    "url": "git+https://github.com/ncains/express-multipart-file-parser.git"
   },
   "author": "Cristóvão Trevisan",
   "license": "MIT",
