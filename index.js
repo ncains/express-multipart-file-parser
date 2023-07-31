@@ -6,11 +6,12 @@ const allowedMethods = ['POST', 'PUT']
 const fileParser = ({ rawBodyOptions, busboyOptions } = {}) => [(req, res, next) => {
   const type = req.headers['content-type']
   if (req.rawBody === undefined && allowedMethods.includes(req.method) && type && type.startsWith('multipart/form-data')) {
-    getRawBody(req, Object.assign({
+    getRawBody(req, {
       length: req.headers['content-length'],
       limit: '10mb',
       encoding: contentType.parse(req).parameters.charset,
-    }, rawBodyOptions), (err, rawBody) => {
+      ...rawBodyOptions,
+    }, (err, rawBody) => {
       if (err) next(err)
       else {
         req.rawBody = rawBody
@@ -25,7 +26,7 @@ const fileParser = ({ rawBodyOptions, busboyOptions } = {}) => [(req, res, next)
   if (allowedMethods.includes(req.method) && type && type.startsWith('multipart/form-data')) {
     let busboy = null
     try {
-      busboy = new Busboy(Object.assign({ headers: req.headers }, busboyOptions))
+      busboy = new Busboy({ headers: req.headers, ...busboyOptions })
     } catch (err) {
       next()
       return
